@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router, private cookie: CookieService) {}
   
   ngOnInit(): void {}
 
@@ -17,9 +19,11 @@ export class HeaderComponent implements OnInit {
   }
 
   disconnect() {
-    this.http.get("http://localhost:8000/api/sign-out")
-      .subscribe((response) => {
-        console.log(response);
+    this.http.get("http://localhost:8000/api/sign-out", { withCredentials: true })
+      .subscribe((response: any) => {
+        if(response.status == 0)
+          this.router.navigateByUrl("sign-in");
+        else console.log(response);
       });
   }
 
