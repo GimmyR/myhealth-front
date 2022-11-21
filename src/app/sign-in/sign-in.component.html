@@ -1,0 +1,19 @@
+<div class="container">
+    <form [formGroup]="formData" (ngSubmit)="onSubmit(formData.value)" class="col-md-4 offset-md-4 mt-3 py-4 rounded bg-light">
+        <div class="mb-3 px-4">
+            <label for="email" class="form-label">Adresse Email</label>
+            <input type="email" id="email" class="form-control" formControlName="email" />
+        </div>
+        <div class="mb-4 px-4">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input type="password" id="password" class="form-control" formControlName="password" />
+        </div>
+        <div class="text-center mb-4 fs-7">
+            <a href="#" class="text-decoration-none pe-1">Créer un compte</a> <span class="text-primary">|</span> 
+            <a href="#" class="text-decoration-none ps-1">Mot de passe oublié ?</a>
+        </div>
+        <div class="mb-3 px-4">
+            <button type="submit" class="btn btn-primary col-md-12">Se connecter</button>
+        </div>
+    </form>
+</div>
