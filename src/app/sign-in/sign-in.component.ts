@@ -1,6 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -25,8 +23,8 @@ export class SignInComponent implements OnInit {
   onSubmit() {
     this.http.post("http://localhost:8000/api/sign-in", this.formData.value)
       .subscribe(
-        (data) => {
-          console.log(data);
+        (response) => {
+          console.log(response);
         }
       );
   }
