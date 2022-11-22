@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { CookieService } from 'ngx-cookie-service';
 import { OversightComponent } from './oversight/oversight.component';
 import { NgChartsModule } from 'ng2-charts';
+import { OversightEntryComponent } from './oversight-entry/oversight-entry.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NgChartsModule } from 'ng2-charts';
     SignInComponent,
     HomeComponent,
     HeaderComponent,
-    OversightComponent
+    OversightComponent,
+    OversightEntryComponent
   ],
   imports: [
     BrowserModule,

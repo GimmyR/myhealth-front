@@ -28,9 +28,9 @@ export class SignInComponent implements OnInit {
     this.http.post("http://localhost:8000/api/sign-in", this.formData.value, { withCredentials: true })
       .subscribe(
         (response: any) => {
-          if(response.status == 0) {
+          if(response.status == 0)
             this.router.navigateByUrl("index");
-          } else console.log(response);
+          else console.log(response);
         }
       );
 
