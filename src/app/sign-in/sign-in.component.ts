@@ -29,7 +29,7 @@ export class SignInComponent implements OnInit {
       .subscribe(
         (response: any) => {
           if(response.status == 0) {
-            this.router.navigateByUrl("");
+            this.router.navigateByUrl("index");
           } else console.log(response);
         }
       );

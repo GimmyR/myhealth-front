@@ -5,7 +5,7 @@ import { OversightComponent } from "./oversight/oversight.component";
 import { SignInComponent } from "./sign-in/sign-in.component";
 
 const routes: Routes = [
-    { path: "", component: HomeComponent },
+    { path: "index", component: HomeComponent },
     { path: "sign-in", component: SignInComponent },
     { path: "oversight/:id", component: OversightComponent }
 ];
