@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  ngOnInit(): void {}
+  oversights!: any[];
+
+  constructor(private http: HttpClient, private router: Router) {}
+
+  ngOnInit(): void {
+    this.http.get("http://localhost:8000/api/home-index", { withCredentials: true })
+      .subscribe((response: any) => {
+        if(response.status == 0) {
+          this.oversights = response.oversights;
+        } else {
+          this.router.navigateByUrl("sign-in");
+        }
+      });
+  }
 
 }

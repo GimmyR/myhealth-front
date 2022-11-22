@@ -9,13 +9,15 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { CookieService } from 'ngx-cookie-service';
+import { OversightComponent } from './oversight/oversight.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    OversightComponent
   ],
   imports: [
     BrowserModule,
