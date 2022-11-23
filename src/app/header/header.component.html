@@ -1,18 +1,18 @@
 <nav class="navbar navbar-expand bg-primary navbar-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand fw-bold ps-3" routerLink="/index">MyHealth</a>
+      <a class="navbar-brand fw-bold ps-3" routerLink="/">MyHealth</a>
       <form class="col-md-4 offset-md-3">
         <input class="form-control" type="search" placeholder="Rechercher surveillance" aria-label="Search">
       </form>
       <div class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
               <li class="nav-item">
-                  <a routerLink="#" class="nav-link p-0 me-3" (click)="create()">
+                  <a href="#" class="nav-link p-0 me-3" (click)="create()">
                       <i class="bi bi-plus-circle text-light fs-3"></i>
                   </a>
               </li>
               <li class="nav-item">
-                  <a routerLink="#" class="nav-link p-0 me-3" (click)="disconnect()">
+                  <a href="#" class="nav-link p-0 me-3" (click)="disconnect()">
                       <i class="bi bi-person-circle text-light fs-3"></i>
                   </a>
               </li>

@@ -7,16 +7,16 @@
         <form>
             <div class="col-md-4">
                 <label for="date" class="form-label">Date & heure</label>
-                <input type="datetime-local" name="date" id="date" class="form-control"/>
+                <input type="datetime-local" name="date" [formControl]="formDate" id="date" class="form-control" required>
             </div>
-                <div *ngFor="let parameter of parameters" class="mt-3">
+                <div *ngFor="let parameter of parameters; let i = index;" class="mt-3">
                     <label class="form-label">
                         {{ parameter.name }} <span *ngIf="parameter.unit != null">({{ parameter.unit }})</span>
                     </label>
-                    <input type="number" name="parameter-{{ parameter.id }}" class="form-control" min="0" step="any">
+                    <input type="number" name="params{{i}}" [formControl]="formParameters[i]" class="form-control" min="0" step="any">
                 </div>
             <div class="mt-4 mb-3">
-                <button class="btn btn-primary col-md-3 offset-md-9">Ajouter données</button>
+                <button (click)="submit($event)" class="btn btn-primary col-md-3 offset-md-9">Ajouter données</button>
             </div>
         </form>
     </div>
