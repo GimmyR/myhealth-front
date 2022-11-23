@@ -12,6 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { OversightComponent } from './oversight/oversight.component';
 import { NgChartsModule } from 'ng2-charts';
 import { OversightEntryComponent } from './oversight-entry/oversight-entry.component';
+import { OversightEntryEditComponent } from './oversight-entry-edit/oversight-entry-edit.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { OversightEntryComponent } from './oversight-entry/oversight-entry.compo
     HomeComponent,
     HeaderComponent,
     OversightComponent,
-    OversightEntryComponent
+    OversightEntryComponent,
+    OversightEntryEditComponent
   ],
   imports: [
     BrowserModule,

@@ -41,7 +41,15 @@ export class OversightEntryComponent implements OnInit {
       params[i] = { id: this.parameters[i].id, value: this.formParameters[i].value }
 
     const data = { date: this.formDate.value, parameters: params };
-    console.log(data);
+    const options = { withCredentials: true };
+    this.http.post("http://localhost:8000/api/oversight-entry/add/" + this.oversight.id, data, options)
+      .subscribe((response: any) => {
+        if(response.status == 0) {
+          console.log(response);
+        } else if (response.status == -2) {
+          this.router.navigateByUrl("sign-in");
+        } else console.log(response);
+      });
   }
 
 }
