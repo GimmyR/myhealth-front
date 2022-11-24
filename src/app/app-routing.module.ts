@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { CreateOversightComponent } from "./create-oversight/create-oversight.component";
 import { HomeComponent } from "./home/home.component";
 import { OversightEntryEditComponent } from "./oversight-entry-edit/oversight-entry-edit.component";
 import { OversightEntryComponent } from "./oversight-entry/oversight-entry.component";
@@ -12,6 +13,7 @@ const routes: Routes = [
     { path: "oversight/:id", component: OversightComponent },
     { path: "oversight-entry/add/:oversightId", component: OversightEntryComponent },
     { path: "oversight-entry/edit/:id", component: OversightEntryEditComponent },
+    { path: "create-oversight", component: CreateOversightComponent },
 ];
 
 @NgModule({

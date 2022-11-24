@@ -13,6 +13,7 @@ import { OversightComponent } from './oversight/oversight.component';
 import { NgChartsModule } from 'ng2-charts';
 import { OversightEntryComponent } from './oversight-entry/oversight-entry.component';
 import { OversightEntryEditComponent } from './oversight-entry-edit/oversight-entry-edit.component';
+import { CreateOversightComponent } from './create-oversight/create-oversight.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { OversightEntryEditComponent } from './oversight-entry-edit/oversight-en
     HeaderComponent,
     OversightComponent,
     OversightEntryComponent,
-    OversightEntryEditComponent
+    OversightEntryEditComponent,
+    CreateOversightComponent
   ],
   imports: [
     BrowserModule,
