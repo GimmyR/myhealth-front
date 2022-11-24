@@ -18,9 +18,12 @@ export class CreateOversightComponent implements OnInit {
                 private router: Router) {}
 
   ngOnInit(): void {
-    //***********************************************************
-    // ICI IL FAUT VERIFIER AVEC LE SERVEUR SI ON EST AUTHENTIFIE
-    //***********************************************************
+    const options = { withCredentials: true };
+    this.http.get("http://localhost:8000/api/create-oversight/get", options)
+      .subscribe((response: any) => {
+        if(response.status == -1)
+          this.router.navigateByUrl("sign-in");
+      });
 
     this.title = new FormControl(null);
     
@@ -29,16 +32,32 @@ export class CreateOversightComponent implements OnInit {
     ];
   }
 
+  getCurrentDateTime() {
+    let datetime = new Date();
+    let time = datetime.toLocaleTimeString([], 
+      { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }
+    ); return datetime.getFullYear() + "-" + datetime.getMonth() + "-" + datetime.getDate() + " " + time;
+  }
+
   submit(e: Event) {
     e.preventDefault();
-    const title: string = this.title.value;
     const parameters: any[] = [];
+    const body = {
+      date: this.getCurrentDateTime(),
+      title: this.title.value,
+      parameters: parameters
+    }; const options = { withCredentials: true };
+
     this.parameters.forEach(function(parameter: any) {
-      parameters.push({ name: parameter.name.value, unit: parameter.unit.value });
+      body.parameters.push({ name: parameter.name.value, unit: parameter.unit.value });
     });
 
-    console.log(title);
-    console.log(parameters);
+    this.http.post("http://localhost:8000/api/create-oversight/post", body, options)
+      .subscribe((response: any) => {
+        if(response.status == -1)
+          this.router.navigateByUrl("sign-in")
+        else console.log(response);
+      });
   }
 
   addParameter(e: Event) {

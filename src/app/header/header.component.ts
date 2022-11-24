@@ -14,10 +14,6 @@ export class HeaderComponent implements OnInit {
   
   ngOnInit(): void {}
 
-  create() {
-    console.log("CREATE !");
-  }
-
   disconnect() {
     this.http.get("http://localhost:8000/api/sign-out", { withCredentials: true })
       .subscribe((response: any) => {
