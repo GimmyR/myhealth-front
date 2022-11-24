@@ -12,7 +12,7 @@ export class CreateOversightComponent implements OnInit {
 
   title!: FormControl;
 
-  parameters!: any;
+  parameters!: any[];
 
   constructor(private http: HttpClient, 
                 private router: Router) {}
@@ -22,19 +22,23 @@ export class CreateOversightComponent implements OnInit {
     // ICI IL FAUT VERIFIER AVEC LE SERVEUR SI ON EST AUTHENTIFIE
     //***********************************************************
 
-    this.title = new FormControl('');
+    this.title = new FormControl(null);
     
     this.parameters = [
-      { name: new FormControl(''), unit: new FormControl('') }
+      { name: new FormControl(null), unit: new FormControl(null) }
     ];
   }
 
   submit(e: Event) {
     e.preventDefault();
-    console.log(this.title.value);
+    const title: string = this.title.value;
+    const parameters: any[] = [];
     this.parameters.forEach(function(parameter: any) {
-      console.log(parameter.name.value + ':' + parameter.unit.value);
+      parameters.push({ name: parameter.name.value, unit: parameter.unit.value });
     });
+
+    console.log(title);
+    console.log(parameters);
   }
 
   addParameter(e: Event) {
