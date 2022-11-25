@@ -63,7 +63,7 @@ export class CreateOversightComponent implements OnInit {
   addParameter(e: Event) {
     e.preventDefault();
     this.parameters.push(
-      { name: new FormControl(''), unit: new FormControl('') }
+      { name: new FormControl(null), unit: new FormControl(null) }
     );
   }
 

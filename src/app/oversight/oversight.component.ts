@@ -29,7 +29,7 @@ export class OversightComponent implements OnInit {
           this.entryDetails = response.entryDetails;
           this.parameters = response.parameters;
           this.chartDatas = response.chartDatas;
-        } else if(response.status == -2)
+        } else if(response.status == -1)
           this.router.navigateByUrl("sign-in");
         else console.log(response);
       }
