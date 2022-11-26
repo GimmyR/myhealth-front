@@ -7,14 +7,33 @@
       <div class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
               <li class="nav-item">
-                  <a routerLink="/create-oversight"class="nav-link p-0 me-3">
+                  <a routerLink="/create-oversight" class="nav-link p-0 me-3">
                       <i class="bi bi-plus-circle text-light fs-3"></i>
                   </a>
               </li>
               <li class="nav-item">
-                  <a href="#" class="nav-link p-0 me-3" (click)="disconnect()">
-                      <i class="bi bi-person-circle text-light fs-3"></i>
-                  </a>
+                <div class="dropdown">
+                    <button type="button" class="btn-account p-0 me-3" (click)="checkAccount()" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle text-light fs-3"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li *ngIf="account != null" class="py-1 text-primary border-top border-bottom border-1">
+                            <span class="ps-3 pe-1">{{account.firstname}}</span>
+                            <span class="pe-3">{{account.lastname}}</span>
+                        </li>
+                        <li *ngIf="account != null" class="border-bottom border-1">
+                            <a href="#" class="dropdown-item">Paramètres</a>
+                        </li>
+                        <li *ngIf="account != null" class="border-bottom border-1">
+                            <a href="#" (click)="disconnect()" class="dropdown-item">Déconnexion</a>
+                        </li>
+                        <div *ngIf="account == null"  class="d-flex justify-content-center">
+                            <div class="spinner-border text-light" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
               </li>
           </ul>
       </div>
