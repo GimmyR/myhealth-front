@@ -19,7 +19,7 @@ export class CreateOversightComponent implements OnInit {
 
   ngOnInit(): void {
     const options = { withCredentials: true };
-    this.http.get("http://localhost:8000/api/create-oversight/get", options)
+    this.http.get("http://localhost:8000/api/session-check", options)
       .subscribe((response: any) => {
         if(response.status == -1)
           this.router.navigateByUrl("sign-in");
