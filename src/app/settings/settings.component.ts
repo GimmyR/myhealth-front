@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -21,13 +21,15 @@ export class SettingsComponent implements OnInit {
       .subscribe((response: any) => {
         if(response.status == -1)
           this.router.navigateByUrl("sign-in");
-        else {
-          this.disabledForm.firstname = new FormControl({value: response.account.firstname, disabled: true});
-          this.disabledForm.lastname = new FormControl({value: response.account.lastname, disabled: true});
-          this.disabledForm.email = new FormControl({value: response.account.email, disabled: true});
-          this.disabledForm.password = new FormControl({value: response.account.password, disabled: true});
-        }
+        else this.setDisabledForm(response);
       });
+  }
+
+  setDisabledForm(response: any) {
+    this.disabledForm.firstname = new FormControl({value: response.account.firstname, disabled: true});
+    this.disabledForm.lastname = new FormControl({value: response.account.lastname, disabled: true});
+    this.disabledForm.email = new FormControl({value: response.account.email, disabled: true});
+    this.disabledForm.password = new FormControl({value: response.account.password, disabled: true});
   }
 
   changeFirstname() {
@@ -73,7 +75,9 @@ export class SettingsComponent implements OnInit {
 
     this.http.post("http://localhost:8000/api/account-edit", body, { withCredentials: true })
       .subscribe((response: any) => {
-        console.log(response);
+        if(response.status == 0) {
+          this.setDisabledForm(response);
+        } else console.log(response);
       });
   }
 
