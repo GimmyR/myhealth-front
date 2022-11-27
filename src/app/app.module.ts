@@ -15,6 +15,7 @@ import { OversightEntryComponent } from './oversight-entry/oversight-entry.compo
 import { OversightEntryEditComponent } from './oversight-entry-edit/oversight-entry-edit.component';
 import { CreateOversightComponent } from './create-oversight/create-oversight.component';
 import { EditOversightComponent } from './edit-oversight/edit-oversight.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EditOversightComponent } from './edit-oversight/edit-oversight.componen
     OversightEntryComponent,
     OversightEntryEditComponent,
     CreateOversightComponent,
-    EditOversightComponent
+    EditOversightComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

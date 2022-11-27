@@ -22,7 +22,7 @@
                             <span class="pe-3">{{account.lastname}}</span>
                         </li>
                         <li *ngIf="account != null" class="border-bottom border-1">
-                            <a href="#" class="dropdown-item">Paramètres</a>
+                            <a routerLink="/settings" class="dropdown-item">Paramètres</a>
                         </li>
                         <li *ngIf="account != null" class="border-bottom border-1">
                             <a href="#" (click)="disconnect()" class="dropdown-item">Déconnexion</a>
