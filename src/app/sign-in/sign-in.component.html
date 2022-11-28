@@ -9,7 +9,7 @@
             <input type="password" id="password" class="form-control" [formControl]="password" />
         </div>
         <div class="text-center mb-4 fs-7">
-            <a href="#" class="text-decoration-none pe-1">Créer un compte</a> <span class="text-primary">|</span> 
+            <a href="#" (click)="createAccount($event)" class="text-decoration-none pe-1">Créer un compte</a> <span class="text-primary">|</span> 
             <a href="#" (click)="forgottenPassword($event)" class="text-decoration-none ps-1">Mot de passe oublié ?</a>
         </div>
         <div class="mb-3 px-4">

@@ -54,5 +54,10 @@ export class SignInComponent implements OnInit {
         } else console.log(response);
       });
   }
+
+  createAccount(e: Event) {
+    e.preventDefault();
+    this.router.navigateByUrl("create-account");
+  }
   
 }

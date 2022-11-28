@@ -17,6 +17,7 @@ import { CreateOversightComponent } from './create-oversight/create-oversight.co
 import { EditOversightComponent } from './edit-oversight/edit-oversight.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ForgottenPasswordComponent } from './forgotten-password/forgotten-passw
     CreateOversightComponent,
     EditOversightComponent,
     SettingsComponent,
-    ForgottenPasswordComponent
+    ForgottenPasswordComponent,
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,37 @@
+<div *ngIf="firstname != null && lastname != null && email != null && password != null && confirm != null" class="container bg-light py-5">
+    <form class="col-md-6 offset-md-3">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="firstname" class="form-label">Prénom(s)</label>
+                <input type="text" [formControl]="firstname" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="lastname" class="form-label">Nom de famille</label>
+                <input type="text" [formControl]="lastname" class="form-control">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <label for="email" class="form-label">Adresse email</label>
+                <input type="email" [formControl]="email" class="form-control">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" [formControl]="password" class="form-control">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <label for="confirm" class="form-label">Confimer Mot de passe</label>
+                <input type="password" [formControl]="confirm" class="form-control">
+            </div>
+        </div>
+        <div class="row mt-5 mb-3">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-primary col-md-12">Créer compte</button>
+            </div>
+        </div>
+    </form>
+</div>
