@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -11,10 +12,21 @@ import { CookieService } from 'ngx-cookie-service';
 export class HeaderComponent implements OnInit {
 
   account!: any;
+  keywords!: FormControl;
 
-  constructor(private http: HttpClient, private router: Router, private cookie: CookieService) {}
+  @Input()
+  oversights!: any[];
+
+  constructor(private http: HttpClient, 
+                private router: Router, 
+                  private route: ActivatedRoute,
+                    private cookie: CookieService) {}
   
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.keywords = new FormControl(null);
+    if(this.route.snapshot.params["keywords"] != null)
+      this.keywords = new FormControl(this.route.snapshot.params["keywords"]);
+  }
 
   disconnect() {
     this.http.get("http://localhost:8000/api/sign-out", { withCredentials: true })
@@ -32,6 +44,13 @@ export class HeaderComponent implements OnInit {
           this.account = response.account;
         }
       });
+  }
+
+  search(e: Event) {
+    e.preventDefault();
+    if(this.keywords.value != null) {
+      this.router.navigateByUrl("search/" + this.keywords.value);
+    } else console.log("Mots clés de recherche inexistants !");
   }
 
 }

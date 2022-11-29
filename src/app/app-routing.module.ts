@@ -24,6 +24,7 @@ const routes: Routes = [
     { path: "forgotten-password", component: ForgottenPasswordComponent },
     { path: "create-account", component: CreateAccountComponent },
     { path: "confirm-account/:confirm", component: ConfirmAccountComponent },
+    { path: "search/:keywords", component: HomeComponent },
 ];
 
 @NgModule({
