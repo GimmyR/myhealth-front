@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { ConfirmAccountComponent } from "./confirm-account/confirm-account.component";
 import { CreateAccountComponent } from "./create-account/create-account.component";
 import { CreateOversightComponent } from "./create-oversight/create-oversight.component";
 import { EditOversightComponent } from "./edit-oversight/edit-oversight.component";
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: "settings", component: SettingsComponent },
     { path: "forgotten-password", component: ForgottenPasswordComponent },
     { path: "create-account", component: CreateAccountComponent },
+    { path: "confirm-account/:confirm", component: ConfirmAccountComponent },
 ];
 
 @NgModule({

@@ -26,4 +26,24 @@ export class CreateAccountComponent implements OnInit {
     this.confirm = new FormControl(null);
   }
 
+  createAccount() {
+    if(this.password.value != this.confirm.value)
+      console.log("Les 2 mots de passe ne correspondent pas !");
+    else {
+      let body = {
+        firstname: this.firstname.value,
+        lastname: this.lastname.value,
+        email: this.email.value,
+        password: this.password.value
+      }; let options = { withCredentials: true };
+
+      this.http.post("http://localhost:8000/api/create-account", body, options)
+        .subscribe((response: any) => {
+          if(response.status == 0)
+            this.router.navigateByUrl("");
+          else console.log(response);
+        });
+    }
+  }
+
 }
