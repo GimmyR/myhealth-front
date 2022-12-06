@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
 
   account!: any;
   keywords!: FormControl;
+  isSearching!: boolean;
 
   @Input()
   oversights!: any[];
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
                     private cookie: CookieService) {}
   
   ngOnInit(): void {
+    this.isSearching = false;
     this.keywords = new FormControl(null);
     if(this.route.snapshot.params["keywords"] != null)
       this.keywords = new FormControl(this.route.snapshot.params["keywords"]);
@@ -51,6 +53,15 @@ export class HeaderComponent implements OnInit {
     if(this.keywords.value != null) {
       this.router.navigateByUrl("search/" + this.keywords.value);
     } else console.log("Mots clés de recherche inexistants !");
+  }
+
+  doSearch(e: Event) {
+    e.preventDefault();
+    this.isSearching = true;
+  }
+
+  closeSearch() {
+    this.isSearching = false;
   }
 
 }
