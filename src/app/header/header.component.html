@@ -1,7 +1,7 @@
 <nav *ngIf="!isSearching" class="navbar navbar-expand bg-primary navbar-dark fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand fw-bold ps-3" routerLink="/">MyHealth</a>
-      <form (submit)="search($event)" class="col-md-6 offset-md-1 col-lg-4 offset-lg-3 d-sm-none d-md-inline">
+      <form (submit)="search($event)" class="col-md-6 offset-md-1 col-lg-4 offset-lg-3 d-none d-md-inline">
         <input [formControl]="keywords" class="form-control text-bg-primary" type="search" placeholder="Rechercher surveillance" aria-label="Search">
       </form>
       <div class="collapse navbar-collapse justify-content-end">

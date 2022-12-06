@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="container bg-light py-5">
+<div class="container-fluid container-md bg-light py-5">
     <div *ngIf="(oversight != null) && (oversight.title != null)" class="row pt-5 text-center">
         <h1>
             {{oversight.title}}
@@ -16,7 +16,7 @@
     </div>
 
     <div *ngIf="(oversight != null) && (oversight.id != null)" class="row mt-4">
-        <a routerLink="/oversight-entry/add/{{ oversight.id }}" class="btn btn-primary col-md-2 offset-md-5">Ajouter une donnée</a>
+        <a routerLink="/oversight-entry/add/{{ oversight.id }}" class="btn btn-primary col-4 offset-4 col-md-4 offset-md-4 col-xl-2 offset-xl-5">Ajouter une donnée</a>
     </div>
 
     <div *ngIf="(entryDetails != null) && (parameters != null) && (entryDetails.length > 0)" class="col-md-10 offset-md-1 mt-5">
