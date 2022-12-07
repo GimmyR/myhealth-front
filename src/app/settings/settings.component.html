@@ -1,46 +1,46 @@
 <app-header></app-header>
 <div *ngIf="disabledForm.firstname != null && disabledForm.lastname != null && disabledForm.email != null && disabledForm.password != null"
         class="container bg-light mt-5 py-5">
-    <form class="col-md-6 offset-md-3 mb-3">
+    <form class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3 mb-3">
         <div class="row">
-            <div class="col-md-11">
+            <div class="col-10 col-sm-11 col-md-11">
                 <label for="firstname" class="form-label">Prénom(s)</label>
                 <input type="text" [formControl]="disabledForm.firstname" class="form-control">
             </div>
-            <div class="col-md-1 d-flex">
+            <div class="col-1 col-sm-1 col-md-1 d-flex">
                 <a (click)="changeFirstname()" class="btn btn-primary align-self-end" data-bs-toggle="modal" data-bs-target="#change">
                     <i class="bi bi-pencil"></i>
                 </a>
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col-md-11">
+            <div class="col-10 col-sm-11 col-md-11">
                 <label for="lastname" class="form-label">Nom de famille</label>
                 <input type="text" id="lastname" [formControl]="disabledForm.lastname" class="form-control">
             </div>
-            <div class="col-md-1 d-flex">
+            <div class="col-1 col-sm-1 col-md-1 d-flex">
                 <a (click)="changeLastname()" class="btn btn-primary align-self-end" data-bs-toggle="modal" data-bs-target="#change">
                     <i class="bi bi-pencil"></i>
                 </a>
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col-md-11">
+            <div class="col-10 col-sm-11 col-md-11">
                 <label for="email" class="form-label">Adresse email</label>
                 <input type="email" id="email" [formControl]="disabledForm.email" class="form-control">
             </div>
-            <div class="col-md-1 d-flex">
+            <div class="col-1 col-sm-1 col-md-1 d-flex">
                 <a (click)="changeEmail()" class="btn btn-primary align-self-end" data-bs-toggle="modal" data-bs-target="#change">
                     <i class="bi bi-pencil"></i>
                 </a>
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col-md-11">
+            <div class="col-10 col-sm-11 col-md-11">
                 <label for="password" class="form-label">Mot de passe</label>
                 <input type="password" [formControl]="disabledForm.password" class="form-control">
             </div>
-            <div class="col-md-1 d-flex">
+            <div class="col-1 col-sm-1 col-md-1 d-flex">
                 <a (click)="changePassword()" class="btn btn-primary align-self-end" data-bs-toggle="modal" data-bs-target="#change">
                     <i class="bi bi-pencil"></i>
                 </a>
