@@ -60,7 +60,8 @@ export class HeaderComponent implements OnInit {
     this.isSearching = true;
   }
 
-  closeSearch() {
+  closeSearch(e: Event) {
+    e.preventDefault();
     this.isSearching = false;
   }
 
