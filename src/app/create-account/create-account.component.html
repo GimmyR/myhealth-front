@@ -1,5 +1,9 @@
+<div *ngIf="alert" class="alert alert-danger alert-dismissible fade show fs-8 container">
+    {{alertMessage}}
+    <button type="button" (click)="closeAlert()" class="btn-close"></button>
+</div>
 <div *ngIf="firstname != null && lastname != null && email != null && password != null && confirm != null" class="container bg-light py-5">
-    <form class="col-md-6 offset-md-3">
+    <form (submit)="createAccount($event)" class="col-md-6 offset-md-3">
         <div class="row">
             <div class="col-md-6 mt-3">
                 <label for="firstname" class="form-label">Prénom(s)</label>
@@ -30,7 +34,10 @@
         </div>
         <div class="row mt-5 mb-4">
             <div class="col-md-12">
-                <button type="button" (click)="createAccount()" class="btn btn-primary col-12">Créer compte</button>
+                <button type="submit" class="btn btn-primary col-12">
+                    <span *ngIf="!isLoading">Créer compte</span>
+                    <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
     </form>
