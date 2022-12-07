@@ -13,16 +13,23 @@ export class SignInComponent implements OnInit {
 
   email!: FormControl;
   password!: FormControl;
+  alert!: boolean;
+  alertMessage!: string;
+  isLoading!: boolean;
 
   constructor(private http: HttpClient, private router: Router, private cookie: CookieService) {}
   
   ngOnInit(): void {
     this.email = new FormControl(null);
     this.password = new FormControl(null);
+    this.alert = false;
+    this.alertMessage = "";
+    this.isLoading = false;
   }
 
   submit(e: Event) {
     e.preventDefault();
+    this.isLoading = true;
     
     let body = {
       email: this.email.value,
@@ -32,9 +39,13 @@ export class SignInComponent implements OnInit {
     this.http.post("http://localhost:8000/api/sign-in", body, { withCredentials: true })
       .subscribe(
         (response: any) => {
+          this.isLoading = false;
           if(response.status == 0)
             this.router.navigateByUrl("");
-          else console.log(response);
+          else {
+            this.alert = true;
+            this.alertMessage = response.message;
+          }
         }
       );
 
@@ -51,13 +62,20 @@ export class SignInComponent implements OnInit {
       .subscribe((response: any) => {
         if(response.status == 0) {
           this.router.navigateByUrl("forgotten-password");
-        } else console.log(response);
+        } else {
+          this.alert = true;
+          this.alertMessage = response.message;
+        }
       });
   }
 
   createAccount(e: Event) {
     e.preventDefault();
     this.router.navigateByUrl("create-account");
+  }
+
+  closeAlert() {
+    this.alert = false;
   }
   
 }

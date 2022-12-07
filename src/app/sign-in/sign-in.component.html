@@ -1,4 +1,9 @@
 <div class="container-fluid container-md container-xl">
+    <div *ngIf="alert" class="alert alert-danger alert-dismissible fade show fs-8
+                                col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 mt-3">
+        {{alertMessage}}
+        <button type="button" (click)="closeAlert()" class="btn-close"></button>
+    </div>
     <form (submit)="submit($event)" class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 mt-3 py-4 rounded bg-light">
         <div class="mb-3 px-4">
             <label for="email" class="form-label">Adresse Email</label>
@@ -13,7 +18,10 @@
             <a href="#" (click)="forgottenPassword($event)" class="text-decoration-none ps-1">Mot de passe oublié ?</a>
         </div>
         <div class="mb-3 px-4">
-            <button type="submit" class="btn btn-primary col-12 col-md-12 col-lg-12 col-xl-12">Se connecter</button>
+            <button type="submit" class="btn btn-primary col-12 col-md-12 col-lg-12 col-xl-12">
+                <span *ngIf="!isLoading">Se connecter</span>
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            </button>
         </div>
     </form>
 </div>
