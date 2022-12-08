@@ -16,13 +16,21 @@ export class OversightEntryComponent implements OnInit {
   formDate!: FormControl;
   formParameters!: any;
 
+  isConnected!: boolean;
+  isLoading!: boolean;
+  alert!: any;
+
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.isConnected = false;
+    this.isLoading = false;
+    this.alert = { error: false, display: false, message: null };
     this.http.get(
       'http://localhost:8000/api/oversight-entry/' + this.route.snapshot.params["oversightId"],
       { withCredentials: true }).subscribe((response: any) => {
         if(response.status == 0) {
+          this.isConnected = true;
           this.oversight = response.oversight;
           this.parameters = response.parameters;
 
@@ -36,6 +44,7 @@ export class OversightEntryComponent implements OnInit {
 
   submit(e: Event) {
     e.preventDefault();
+    this.isLoading = true;
     const params = [];
     for(let i = 0; i < this.parameters.length; i++)
       params[i] = { id: this.parameters[i].id, value: this.formParameters[i].value }
@@ -44,12 +53,22 @@ export class OversightEntryComponent implements OnInit {
     const options = { withCredentials: true };
     this.http.post("http://localhost:8000/api/oversight-entry/add/" + this.oversight.id, data, options)
       .subscribe((response: any) => {
+        this.isLoading = false;
         if(response.status == 0) {
-          console.log(response);
+          this.alert.display = true;
+          this.alert.message = "Donnée bien ajoutée !";
         } else if (response.status == -2) {
           this.router.navigateByUrl("sign-in");
-        } else console.log(response);
+        } else {
+          this.alert.error = true;
+          this.alert.display = true;
+          this.alert.message = response.message;
+        }
       });
+  }
+
+  closeAlert(): void {
+    this.alert.display = false;
   }
 
 }

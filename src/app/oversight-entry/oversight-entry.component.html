@@ -1,11 +1,21 @@
 <app-header></app-header>
-<div class="container bg-light mt-5 py-5">
+<div *ngIf="isConnected" class="container bg-light mt-5 py-5">
+    <div *ngIf="alert.display && alert.error" class="alert alert-danger alert-dismissible fade show
+        col-8 offset-2 col-lg-8 offset-lg-2 fs-8 mb-5">
+        {{alert.message}}
+        <button type="button" (click)="closeAlert()" class="btn-close"></button>
+    </div>
+    <div *ngIf="alert.display && !alert.error" class="alert alert-success alert-dismissible fade show
+        col-8 offset-2 col-lg-8 offset-lg-2 fs-8 mb-5">
+        {{alert.message}}
+        <button type="button" (click)="closeAlert()" class="btn-close"></button>
+    </div>
     <div *ngIf="oversight != null && oversight.title != null" class="text-center">
         <h1 class="fs-3">{{ oversight.title }}</h1>
     </div>
     <div class="col-md-8 offset-md-2 mt-5">
-        <form>
-            <div class="col-md-4">
+        <form (submit)="submit($event)">
+            <div>
                 <label for="date" class="form-label">Date & heure</label>
                 <input type="datetime-local" name="date" [formControl]="formDate" id="date" class="form-control" required>
             </div>
@@ -16,8 +26,24 @@
                     <input type="number" name="params{{i}}" [formControl]="formParameters[i]" class="form-control" min="0" step="any">
                 </div>
             <div class="mt-4 mb-3">
-                <button (click)="submit($event)" class="btn btn-primary col-12 col-md-5 offset-md-7 col-xl-3 offset-xl-9">Ajouter données</button>
+                <button type="submit" class="btn btn-primary col-12 col-md-5 offset-md-7 col-xl-3 offset-xl-9">
+                    <span *ngIf="!isLoading">Ajouter données</span>
+                    <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </button>
             </div>
         </form>
+    </div>
+</div>
+<div *ngIf="!isConnected" class="container-fluid">
+    <div class="d-flex justify-content-center mt-4 py-5">
+        <div class="spinner-grow mx-1" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow mx-1" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow mx-1" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
 </div>
