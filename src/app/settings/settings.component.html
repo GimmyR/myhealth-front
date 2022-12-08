@@ -48,22 +48,41 @@
         </div>
     </form>
 </div>
+<div *ngIf="disabledForm.firstname == null || disabledForm.lastname == null || disabledForm.email == null || disabledForm.password == null" class="container-fluid">
+    <div class="d-flex justify-content-center mt-4 py-5">
+        <div class="spinner-grow mx-1" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow mx-1" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow mx-1" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
 
 <!-- MODAL FOR CHANGING SOMETHING -->
 <div *ngIf="modalForm != null" class="modal fade" id="change" tabindex="-1" aria-labelledby="changeLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="changeLabel">
-                    <span *ngIf="modalForm.firstname != null">Modifier prénom(s)</span>
-                    <span *ngIf="modalForm.lastname != null">Modifier nom de famille</span>
-                    <span *ngIf="modalForm.email != null">Modifier adresse email</span>
-                    <span *ngIf="modalForm.newPassword != null">Modifier mot de passe</span>
-                </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
+            <form (submit)="save($event)">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="changeLabel">
+                        <span *ngIf="modalForm.firstname != null">Modifier prénom(s)</span>
+                        <span *ngIf="modalForm.lastname != null">Modifier nom de famille</span>
+                        <span *ngIf="modalForm.email != null">Modifier adresse email</span>
+                        <span *ngIf="modalForm.newPassword != null">Modifier mot de passe</span>
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="alert.display && alert.error" class="alert alert-danger alert-dismissible fade show">
+                        {{alert.message}}
+                    </div>
+                    <div *ngIf="alert.display && !alert.error" class="alert alert-success alert-dismissible fade show">
+                        {{alert.message}}
+                    </div>
                     <div>
                         <input *ngIf="modalForm.firstname != null" [formControl]="modalForm.firstname" type="text" class="form-control">
                         <input *ngIf="modalForm.lastname != null" [formControl]="modalForm.lastname" type="text" class="form-control">
@@ -74,11 +93,14 @@
                         <input *ngIf="modalForm.newPassword == null && modalForm.password != null" type="password" [formControl]="modalForm.password" placeholder="Mot de passe" class="form-control">
                         <input *ngIf="modalForm.newPassword != null" type="password" [formControl]="modalForm.newPassword" placeholder="Nouveau mot de passe" class="form-control">
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button (click)="save()" type="button" class="btn btn-primary">Enregistrer</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="col-4 btn btn-primary">
+                        <span *ngIf="!isLoading">Enregistrer</span>
+                        <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

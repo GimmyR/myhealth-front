@@ -13,10 +13,15 @@ export class SettingsComponent implements OnInit {
   disabledForm:any = {};
   modalForm: any = {};
 
+  alert!: any;
+  isLoading!: boolean;
+
   constructor(private http: HttpClient,
               private router: Router) {}
 
   ngOnInit(): void {
+    this.isLoading = false;
+    this.alert = { error: false, display: false, message: null };
     this.http.get("http://localhost:8000/api/session-check", { withCredentials: true })
       .subscribe((response: any) => {
         if(response.status == -1)
@@ -60,7 +65,9 @@ export class SettingsComponent implements OnInit {
     };
   }
 
-  save() {
+  save(e: Event) {
+    e.preventDefault();
+    this.isLoading = true;
     let body: any = { password: this.modalForm.password.value };
 
     if(this.modalForm.firstname != null)
@@ -75,9 +82,17 @@ export class SettingsComponent implements OnInit {
 
     this.http.post("http://localhost:8000/api/account-edit", body, { withCredentials: true })
       .subscribe((response: any) => {
+        this.isLoading = false;
         if(response.status == 0) {
+          this.alert.error = false;
+          this.alert.display = true;
+          this.alert.message = "Modification réussie !";
           this.setDisabledForm(response);
-        } else console.log(response);
+        } else {
+          this.alert.error = true;
+          this.alert.display = true;
+          this.alert.message = response.message;
+        }
       });
   }
 
