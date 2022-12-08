@@ -23,8 +23,8 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li *ngIf="account != null" class="py-1 text-primary border-top border-bottom border-1">
-                            <span class="ps-3 pe-1">{{account.firstname}}</span>
-                            <span class="pe-3">{{account.lastname}}</span>
+                            <div class="px-3">{{account.firstname}}</div>
+                            <div class="px-3">{{account.lastname}}</div>
                         </li>
                         <li *ngIf="account != null" class="border-bottom border-1">
                             <a routerLink="/settings" class="dropdown-item">Paramètres</a>
