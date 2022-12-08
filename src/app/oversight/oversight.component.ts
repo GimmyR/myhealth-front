@@ -14,17 +14,21 @@ export class OversightComponent implements OnInit {
   parameters!: any;
   chartDatas!: any;
 
+  isConnected!: boolean;
+
   constructor(private route: ActivatedRoute, 
               private router: Router,
               private http: HttpClient) {}
 
   ngOnInit(): void {
+    this.isConnected = false;
     this.http.get(
       "http://localhost:8000/api/oversight/" + this.route.snapshot.params["id"], 
       { withCredentials: true }
     ).subscribe(
       (response: any) => {
         if(response.status == 0) {
+          this.isConnected = true;
           this.oversight = response.oversight;
           this.entryDetails = response.entryDetails;
           this.parameters = response.parameters;

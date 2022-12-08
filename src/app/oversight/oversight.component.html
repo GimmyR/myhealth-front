@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="container-fluid container-md bg-light py-5">
+<div *ngIf="isConnected" class="container-fluid container-md bg-light py-5">
     <div *ngIf="(oversight != null) && (oversight.title != null)" class="row pt-5 text-center">
         <h1>
             {{oversight.title}}
@@ -40,5 +40,18 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+<div *ngIf="!isConnected" class="container-fluid">
+    <div class="d-flex justify-content-center mt-4 py-5">
+        <div class="spinner-grow mx-1" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow mx-1" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow mx-1" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
 </div>
