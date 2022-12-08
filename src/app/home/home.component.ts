@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  isConnected!: boolean;
   oversights!: any[];
 
   constructor(private http: HttpClient, 
@@ -20,15 +21,15 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isConnected = false;
     const keywords = this.route.snapshot.params["keywords"];
     if(keywords == null) {
       this.http.get("http://localhost:8000/api/home-index", { withCredentials: true })
         .subscribe((response: any) => {
           if(response.status == 0) {
+            this.isConnected = true;
             this.oversights = response.oversights;
-          } else {
-            this.router.navigateByUrl("sign-in");
-          }
+          } else this.router.navigateByUrl("sign-in");
         });
     } else this.searchFor(keywords);
   }
@@ -38,9 +39,10 @@ export class HomeComponent implements OnInit {
     let options = { withCredentials: true };
     this.http.post("http://localhost:8000/api/search", body, options)
       .subscribe((response: any) => {
-        if(response.status == 0)
+        if(response.status == 0) {
+          this.isConnected = true;
           this.oversights = response.oversights;
-        else if(response.status == -1)
+        } else if(response.status == -1)
           this.router.navigateByUrl("sign-in");
         else console.log(response);
       });
