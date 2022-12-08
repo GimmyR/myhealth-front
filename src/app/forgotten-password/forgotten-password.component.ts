@@ -14,9 +14,14 @@ export class ForgottenPasswordComponent implements OnInit {
   confirm!: FormControl;
   code!: FormControl;
 
+  alert!: any;
+  isLoading!: boolean;
+
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
+    this.isLoading = false;
+    this.alert = { display: false, message: null };
     let options = { withCredentials: true };
     this.http.get("http://localhost:8000/api/forgotten-password/get", options)
       .subscribe((response: any) => {
@@ -30,10 +35,13 @@ export class ForgottenPasswordComponent implements OnInit {
       });
   }
 
-  save() {
-    if(this.password.value != this.confirm.value)
-      console.log("Les 2 mots de passe ne correspondent pas !");
-    else {
+  save(e: Event) {
+    e.preventDefault();
+    if(this.password.value != this.confirm.value) {
+      this.alert.display = true;
+      this.alert.message = "Les 2 mots de passe ne correspondent pas !";
+    } else {
+      this.isLoading = true;
       let body = {
         password: this.password.value,
         code: this.code.value
@@ -41,11 +49,17 @@ export class ForgottenPasswordComponent implements OnInit {
       
       this.http.post("http://localhost:8000/api/forgotten-password/post", body, options)
         .subscribe((response: any) => {
-          if(response.status != 0)
-            console.log(response);
-          else this.router.navigateByUrl("");
+          this.isLoading = false;
+          if(response.status != 0) {
+            this.alert.display = true;
+            this.alert.message = response.message;
+          } else this.router.navigateByUrl("");
         });
     }
+  }
+
+  closeAlert(): void {
+    this.alert.display = false;
   }
 
 }
