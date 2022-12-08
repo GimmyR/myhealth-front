@@ -1,10 +1,20 @@
 <app-header></app-header>
-<div class="container-fluid container-md bg-light mt-5 py-5">
+<div *ngIf="isConnected" class="container-fluid container-md bg-light mt-5 py-5">
+    <div *ngIf="alert.display && alert.error" class="alert alert-danger alert-dismissible fade show
+        col-8 offset-2 col-lg-6 offset-lg-3 fs-8 mb-4">
+        {{alert.message}}
+        <button type="button" (click)="closeAlert()" class="btn-close"></button>
+    </div>
+    <div *ngIf="alert.display && !alert.error" class="alert alert-success alert-dismissible fade show
+        col-8 offset-2 col-lg-6 offset-lg-3 fs-8 mb-4">
+        {{alert.message}}
+        <button type="button" (click)="closeAlert()" class="btn-close"></button>
+    </div>
     <div class="col-10 offset-1 text-center">
         <h1>Créer une surveillance</h1>
     </div>
     <div class="col-10 offset-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 mt-5">
-        <form>
+        <form (submit)="submit($event)">
             <div class="row">
                 <div class="col-10 offset-1 col-md-10 offset-md-1">
                     <label for="title" class="form-label">Maladie à surveiller</label>
@@ -30,10 +40,24 @@
                 <button (click)="addParameter($event)" class="mt-4 col-10 offset-1 col-md-4 offset-md-1 col-lg-3 offset-lg-1 btn btn-success">
                     Ajouter paramètre
                 </button>
-                <button (click)="submit($event)"class="mt-4 col-10 offset-1 col-md-4 offset-md-2 col-lg-3 offset-lg-4 btn btn-primary" >
-                    Créer surveillance
-                </button>
+                <button type="submit" class="mt-4 col-10 offset-1 col-md-4 offset-md-2 col-lg-3 offset-lg-4 btn btn-primary" >
+                    <span *ngIf="!isLoading">Créer surveillance</span>
+                    <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            </button>
             </div>
         </form>
+    </div>
+</div>
+<div *ngIf="!isConnected" class="container-fluid">
+    <div class="d-flex justify-content-center mt-4 py-5">
+        <div class="spinner-grow mx-1" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow mx-1" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow mx-1" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
 </div>

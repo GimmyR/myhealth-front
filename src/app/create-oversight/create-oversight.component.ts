@@ -14,15 +14,29 @@ export class CreateOversightComponent implements OnInit {
 
   parameters!: any[];
 
+  isConnected!: boolean;
+
+  alert!: any;
+
+  isLoading!: boolean;
+
   constructor(private http: HttpClient, 
                 private router: Router) {}
 
   ngOnInit(): void {
+    this.isConnected = false;
+    this.alert = {
+      display: false,
+      message: null,
+      error: false
+    }; this.isLoading = false;
     const options = { withCredentials: true };
     this.http.get("http://localhost:8000/api/session-check", options)
       .subscribe((response: any) => {
         if(response.status == -1)
           this.router.navigateByUrl("sign-in");
+        else if(response.status == 0)
+          this.isConnected = true;
       });
 
     this.title = new FormControl(null);
@@ -41,6 +55,7 @@ export class CreateOversightComponent implements OnInit {
 
   submit(e: Event) {
     e.preventDefault();
+    this.isLoading = true;
     const parameters: any[] = [];
     const body = {
       date: this.getCurrentDateTime(),
@@ -54,9 +69,17 @@ export class CreateOversightComponent implements OnInit {
 
     this.http.post("http://localhost:8000/api/create-oversight/post", body, options)
       .subscribe((response: any) => {
+        this.isLoading = false;
         if(response.status == -1)
           this.router.navigateByUrl("sign-in")
-        else console.log(response);
+        else if(response.status == 0) {
+          this.alert.display = true;
+          this.alert.message = "Création de surveillance réussie !"
+        } else {
+          this.alert.error = true;
+          this.alert.display = true;
+          this.alert.message = response.message;
+        }
       });
   }
 
@@ -70,6 +93,10 @@ export class CreateOversightComponent implements OnInit {
   removeParameter(e: Event, i: number) {
     e.preventDefault();
     this.parameters.splice(i, 1);
+  }
+
+  closeAlert(): void {
+    this.alert.display = false;
   }
 
 }
