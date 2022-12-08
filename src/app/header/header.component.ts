@@ -15,9 +15,6 @@ export class HeaderComponent implements OnInit {
   keywords!: FormControl;
   isSearching!: boolean;
 
-  @Input()
-  oversights!: any[];
-
   constructor(private http: HttpClient, 
                 private router: Router, 
                   private route: ActivatedRoute,
