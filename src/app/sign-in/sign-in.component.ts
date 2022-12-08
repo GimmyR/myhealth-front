@@ -56,10 +56,12 @@ export class SignInComponent implements OnInit {
 
   forgottenPassword(e: Event) {
     e.preventDefault();
+    this.isLoading = true;
     let body = { email: this.email.value };
     let options = { withCredentials: true };
     this.http.post("http://localhost:8000/api/forgotten-password", body, options)
       .subscribe((response: any) => {
+        this.isLoading = false;
         if(response.status == 0) {
           this.router.navigateByUrl("forgotten-password");
         } else {
