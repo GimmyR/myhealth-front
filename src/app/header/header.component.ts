@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -17,8 +17,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private http: HttpClient, 
                 private router: Router, 
-                  private route: ActivatedRoute,
-                    private cookie: CookieService) {}
+                  private route: ActivatedRoute) {}
   
   ngOnInit(): void {
     this.isSearching = false;
@@ -28,7 +27,7 @@ export class HeaderComponent implements OnInit {
   }
 
   disconnect() {
-    this.http.get("http://localhost:8000/api/sign-out", { withCredentials: true })
+    this.http.get(environment.url + "/api/sign-out", { withCredentials: true })
       .subscribe((response: any) => {
         if(response.status == 0) 
           this.router.navigateByUrl("sign-in");
@@ -37,7 +36,7 @@ export class HeaderComponent implements OnInit {
   }
 
   checkAccount() {
-    this.http.get("http://localhost:8000/api/session-check", { withCredentials: true })
+    this.http.get(environment.url + "/api/session-check", { withCredentials: true })
       .subscribe((response: any) => {
         if(response.status == 0) {
           this.account = response.account;

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-create-oversight',
@@ -31,7 +32,7 @@ export class CreateOversightComponent implements OnInit {
       error: false
     }; this.isLoading = false;
     const options = { withCredentials: true };
-    this.http.get("http://localhost:8000/api/session-check", options)
+    this.http.get(environment.url + "/api/session-check", options)
       .subscribe((response: any) => {
         if(response.status == -1)
           this.router.navigateByUrl("sign-in");
@@ -67,7 +68,7 @@ export class CreateOversightComponent implements OnInit {
       body.parameters.push({ name: parameter.name.value, unit: parameter.unit.value });
     });
 
-    this.http.post("http://localhost:8000/api/create-oversight/post", body, options)
+    this.http.post(environment.url + "/api/create-oversight/post", body, options)
       .subscribe((response: any) => {
         this.isLoading = false;
         if(response.status == -1)

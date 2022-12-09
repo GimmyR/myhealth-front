@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-oversight',
@@ -32,21 +33,19 @@ export class EditOversightComponent implements OnInit {
     this.isConnected = false;
     this.isLoading = false;
     this.alert = { error: false, display: false, message: null };
-    this.http.get(
-      "http://localhost:8000/api/edit-oversight/get/" + this.route.snapshot.params['id'],
-      { withCredentials: true }
-    ).subscribe((response: any) => {
-      if(response.status == 0) {
-        this.isConnected = true;
-        this.setAttributes(response);
-      } else if(response.status == -1)
-        this.router.navigateByUrl("sign-in");
-      else {
-        this.alert.error = true;
-        this.alert.display = true;
-        this.alert.message = response.message;
-      }
-    });
+    this.http.get(environment.url + "/api/edit-oversight/get/" + this.route.snapshot.params['id'], { withCredentials: true })
+      .subscribe((response: any) => {
+        if(response.status == 0) {
+          this.isConnected = true;
+          this.setAttributes(response);
+        } else if(response.status == -1)
+          this.router.navigateByUrl("sign-in");
+        else {
+          this.alert.error = true;
+          this.alert.display = true;
+          this.alert.message = response.message;
+        }
+      });
   }
 
   setAttributes(response: any) {
@@ -102,23 +101,20 @@ export class EditOversightComponent implements OnInit {
   }
 
   postData(body: any) {
-    this.http.post(
-      "http://localhost:8000/api/edit-oversight/post/",
-      body,
-      { withCredentials: true }
-    ).subscribe((response: any) => {
-      this.isLoading = false;
-      if(response.status == -1)
-        this.router.navigateByUrl("sign-in");
-      else if(response.status == 0) {
-        this.alert.display = true;
-        this.alert.message = "Mise à jour de surveillance réussie !";
-      } else {
-        this.alert.error = true;
-        this.alert.display = true;
-        this.alert.message = response.message;
-      }
-    });
+    this.http.post(environment.url + "/api/edit-oversight/post/", body, { withCredentials: true })
+      .subscribe((response: any) => {
+        this.isLoading = false;
+        if(response.status == -1)
+          this.router.navigateByUrl("sign-in");
+        else if(response.status == 0) {
+          this.alert.display = true;
+          this.alert.message = "Mise à jour de surveillance réussie !";
+        } else {
+          this.alert.error = true;
+          this.alert.display = true;
+          this.alert.message = response.message;
+        }
+      });
   }
 
   closeAlert(): void {

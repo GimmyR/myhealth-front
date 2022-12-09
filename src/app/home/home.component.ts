@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
     this.isConnected = false;
     const keywords = this.route.snapshot.params["keywords"];
     if(keywords == null) {
-      this.http.get("http://localhost:8000/api/home-index", { withCredentials: true })
+      this.http.get(environment.url + "/api/home-index", { withCredentials: true })
         .subscribe((response: any) => {
           if(response.status == 0) {
             this.isConnected = true;
@@ -37,7 +38,7 @@ export class HomeComponent implements OnInit {
   searchFor(keywords: string) {
     let body = { keywords: keywords };
     let options = { withCredentials: true };
-    this.http.post("http://localhost:8000/api/search", body, options)
+    this.http.post(environment.url + "/api/search", body, options)
       .subscribe((response: any) => {
         if(response.status == 0) {
           this.isConnected = true;

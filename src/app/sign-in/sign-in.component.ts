@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
+
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,7 +18,7 @@ export class SignInComponent implements OnInit {
   alertMessage!: string;
   isLoading!: boolean;
 
-  constructor(private http: HttpClient, private router: Router, private cookie: CookieService) {}
+  constructor(private http: HttpClient, private router: Router) {}
   
   ngOnInit(): void {
     this.email = new FormControl(null);
@@ -36,7 +37,7 @@ export class SignInComponent implements OnInit {
       password: this.password.value
     };
     
-    this.http.post("http://localhost:8000/api/sign-in", body, { withCredentials: true })
+    this.http.post(environment.url + "/api/sign-in", body, { withCredentials: true })
       .subscribe(
         (response: any) => {
           this.isLoading = false;
@@ -59,7 +60,7 @@ export class SignInComponent implements OnInit {
     this.isLoading = true;
     let body = { email: this.email.value };
     let options = { withCredentials: true };
-    this.http.post("http://localhost:8000/api/forgotten-password", body, options)
+    this.http.post(environment.url + "/api/forgotten-password", body, options)
       .subscribe((response: any) => {
         this.isLoading = false;
         if(response.status == 0) {

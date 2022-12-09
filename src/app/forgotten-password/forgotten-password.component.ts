@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-forgotten-password',
@@ -23,7 +24,7 @@ export class ForgottenPasswordComponent implements OnInit {
     this.isLoading = false;
     this.alert = { display: false, message: null };
     let options = { withCredentials: true };
-    this.http.get("http://localhost:8000/api/forgotten-password/get", options)
+    this.http.get(environment.url + "/api/forgotten-password/get", options)
       .subscribe((response: any) => {
         if(response.status == -1)
           this.router.navigateByUrl("sign-in");
@@ -47,7 +48,7 @@ export class ForgottenPasswordComponent implements OnInit {
         code: this.code.value
       }; let options = { withCredentials: true };
       
-      this.http.post("http://localhost:8000/api/forgotten-password/post", body, options)
+      this.http.post(environment.url + "/api/forgotten-password/post", body, options)
         .subscribe((response: any) => {
           this.isLoading = false;
           if(response.status != 0) {

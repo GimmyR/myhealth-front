@@ -3,6 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -22,7 +24,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = false;
     this.alert = { error: false, display: false, message: null };
-    this.http.get("http://localhost:8000/api/session-check", { withCredentials: true })
+    this.http.get(environment.url + "/api/session-check", { withCredentials: true })
       .subscribe((response: any) => {
         if(response.status == -1)
           this.router.navigateByUrl("sign-in");
@@ -80,7 +82,7 @@ export class SettingsComponent implements OnInit {
       body.newPassword = this.modalForm.newPassword.value;
     else console.log("Erreur ?");
 
-    this.http.post("http://localhost:8000/api/account-edit", body, { withCredentials: true })
+    this.http.post(environment.url + "/api/account-edit", body, { withCredentials: true })
       .subscribe((response: any) => {
         this.isLoading = false;
         if(response.status == 0) {

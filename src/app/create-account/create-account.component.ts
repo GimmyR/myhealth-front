@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-create-account',
@@ -48,7 +49,7 @@ export class CreateAccountComponent implements OnInit {
         password: this.password.value
       }; let options = { withCredentials: true };
 
-      this.http.post("http://localhost:8000/api/create-account", body, options)
+      this.http.post(environment.url + "/api/create-account", body, options)
         .subscribe((response: any) => {
           this.isLoading = false;
           if(response.status == 0)

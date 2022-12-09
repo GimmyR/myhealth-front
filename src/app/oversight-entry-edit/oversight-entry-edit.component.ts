@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-oversight-entry-edit',
   templateUrl: './oversight-entry-edit.component.html',
@@ -30,9 +32,8 @@ export class OversightEntryEditComponent implements OnInit {
     this.isConnected = false;
     this.isLoading = false;
     this.alert = { error: false, display: false, message: null };
-    this.http.get(
-      'http://localhost:8000/api/oversight-entry/edit/' + this.route.snapshot.params["id"],
-      { withCredentials: true }).subscribe((response: any) => {
+    this.http.get(environment.url + '/api/oversight-entry/edit/' + this.route.snapshot.params["id"], { withCredentials: true })
+      .subscribe((response: any) => {
         if(response.status == 0) {
           this.isConnected = true;
           this.oversight = response.oversight;
@@ -57,7 +58,7 @@ export class OversightEntryEditComponent implements OnInit {
 
     const data = { date: this.formDate.value, parameters: params };
     const options = { withCredentials: true };
-    this.http.post("http://localhost:8000/api/oversight-entry/edit/" + this.entry.id, data, options)
+    this.http.post(environment.url + "/api/oversight-entry/edit/" + this.entry.id, data, options)
       .subscribe((response: any) => {
         this.isLoading = false;
         if(response.status == 0) {
