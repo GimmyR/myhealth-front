@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     this.isConnected = false;
     const keywords = this.route.snapshot.params["keywords"];
     if(keywords == null) {
+      console.log("API URL: " + environment.url);
       this.http.get(environment.url + "/api/home-index", { withCredentials: true })
         .subscribe((response: any) => {
           if(response.status == 0) {
