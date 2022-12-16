@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+
+	RewriteEngine on
+	RewriteBase /myhealth/
+	
+	RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR] 
+	RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d 
+	RewriteRule ^ - [L]
+	
+	RewriteRule ^ /myhealth/index.html
+	
+</IfModule>

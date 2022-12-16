@@ -1,27 +1,21 @@
-# AngularAppTmp
+# MyHealth
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+Ce projet a été développé avec **Angular** version 15.0.0 donc il est évident que vous devez avoir au moins la même version d'Angular sur votre machine ainsi que la dernière version stable de **Node** et de **NPM**.
 
-## Development server
+## Développement
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Le fichier *environment.ts* dans *src/app/environments* permet de configurer le serveur de l'API utilisée lors l'exécution de la commande `ng serve`.
 
-## Code scaffolding
+## Production
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Le fichier *environment.prod.ts* dans *src/app/environments* permet de configurer le serveur de l'API utilisée par l'application après le build.
 
-## Build
+Pour build l'application, exécutez la commande 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```ng build --configuration=production --base-href /myhealth/```.
 
-## Running unit tests
+## Déploiement
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Je recommande **Apache** pour déployer l'application. Installez-le et assurez-vous d'avoir activé le *Rewrite* et le *AllowOverride* pour permettre au fichier *.htaccess* de faire son boulot.
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Renommez le dossier contenu dans le répertoire *dist* par *myhealth* puis déplacez-le vers le répertoire *root* du serveur **Apache**.
